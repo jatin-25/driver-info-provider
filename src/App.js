@@ -1,25 +1,47 @@
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Toolbar from './Components/Navigation/Toolbar/Toolbar';
+import { Route, Switch, withRouter } from 'react-router-dom';
+import Auth from './Components/Auth/Auth';
+import AddDriver from './Components/AddDriver/AddDriver';
+import ShowDrivers from './Components/ShowDrivers/ShowDrivers';
+import { connect } from 'react-redux';
+class App extends Component {
+  render() {
+    console.log(this.props.isAuthenticated);
+    let routes = null;
+    if(this.props.isAuthenticated){
+      routes = <Switch>
+        <Route path='/' exact>
+          <ShowDrivers />
+        </Route>
+        <Route path='/addDriver' exact> <AddDriver {...this.props}/>
+          </Route>
+        <Route path='/showDrivers' exact> <ShowDrivers {...this.props}/></Route>
+      </Switch>
+    }
+    else {
+      routes = <Switch>
+        <Route path='/' exact >
+          <Auth />
+        </Route>
+        <Route path='*' exact >
+          <Auth/>
+        </Route>
+      </Switch>
+    }
+    return (
+      <div className="App">
+        {this.props.isAuthenticated ? <Toolbar  {...this.props}/> : null}
+        {routes}
+      </div>
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.auth.token != null,
+  }
+}
+export default withRouter(connect(mapStateToProps)(App));

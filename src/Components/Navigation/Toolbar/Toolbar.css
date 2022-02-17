@@ -1,0 +1,57 @@
+.Toolbar {
+    height: 42px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(251, 249, 255, 0.952);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+    z-index: 1;
+    box-shadow:
+		0 1px 2px rgba(0,0,0,0.07), 
+		0 2px 4px rgba(0,0,0,0.07), 
+		0 4px 8px rgba(0,0,0,0.07), 
+		0 8px 16px rgba(0,0,0,0.07),
+		0 16px 32px rgba(0,0,0,0.07), 
+		0 32px 64px rgba(0,0,0,0.07);
+    color: black;
+}
+
+.Toolbar nav {
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.NavItems a{
+    text-decoration: none;
+    list-style-type: none;
+    width: 100%;
+    padding: 10px 0;
+    margin: 0 1em;
+    color: black;
+}
+.NavItems a:hover{
+    border-bottom: 3px solid rgb(7, 78, 102);
+}
+
+.CornerItems{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.CornerItems a{
+    text-decoration: none;
+    list-style-type: none;
+    color: black;
+}
+.CornerItems p{
+    margin: 0 1em;
+}
