@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import axios from "../../axios";
 import { connect } from "react-redux";
 import Modal from "../PopUp/Modal";
+import swal from "sweetalert";
 class AddDriver extends Component{
     state = {
         driverForm: {
@@ -200,6 +201,12 @@ class AddDriver extends Component{
             }
             axios.post("/users/"+this.props.userId+"/driversList.json?auth="+this.props.token, formData).then(response => {
                 // console.log(response);
+                swal({  
+                title: "Congratulations!",  
+                text: "Your Data has been saved",  
+                icon: "success",  
+                button: "Okay",  
+                }); 
             });
             
         }
