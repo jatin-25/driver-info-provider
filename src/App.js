@@ -8,7 +8,7 @@ import ShowDrivers from './Components/ShowDrivers/ShowDrivers';
 import { connect } from 'react-redux';
 class App extends Component {
   render() {
-    console.log(this.props.isAuthenticated);
+    // console.log(this.props.isAuthenticated);
     let routes = null;
     if(this.props.isAuthenticated){
       routes = <Switch>
