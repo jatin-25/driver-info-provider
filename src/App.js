@@ -6,7 +6,15 @@ import Auth from './Components/Auth/Auth';
 import AddDriver from './Components/AddDriver/AddDriver';
 import ShowDrivers from './Components/ShowDrivers/ShowDrivers';
 import { connect } from 'react-redux';
+import * as actions from './Store/Actions/index';
+
+
 class App extends Component {
+
+  componentDidMount = () => {
+    this.props.isAuthValid();
+  }
+
   render() {
     // console.log(this.props.isAuthenticated);
     let routes = null;
@@ -44,4 +52,9 @@ const mapStateToProps = state => {
     isAuthenticated: state.auth.token != null,
   }
 }
-export default withRouter(connect(mapStateToProps)(App));
+const mapDispatchToProps = (dispatch) => {
+  return {
+    isAuthValid: () => dispatch(actions.autoCheckAuthOnRefresh())
+  }
+}
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(App));

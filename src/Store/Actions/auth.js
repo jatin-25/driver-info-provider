@@ -40,7 +40,26 @@ export const authFail = (errorObject) => {
     }
 }
 
-
+export const autoCheckAuthOnRefresh = () => {
+    return dispatch => {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            dispatch(logout());
+        }
+        else {
+            const userId = localStorage.getItem("userId");
+            const expirationDate = new Date(localStorage.getItem("expirationDate"));
+            dispatch(authSuccess(token, userId));
+            if(expirationDate < new Date()){
+                dispatch(logout());
+            }
+            else{
+                dispatch(authSuccess(token,userId));
+                dispatch(setExpirationTime((expirationDate.getTime()-new Date().getTime())/1000))
+            }
+        }
+    }
+}
 export const auth = (formData,isSignUp) => {
     return dispatch => {
         dispatch(authStart());
